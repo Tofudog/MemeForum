@@ -1,6 +1,11 @@
 h1 {
   color:rgb(117, 23, 23);
 }
+
+h2 {
+  color: darkolivegreen;
+}
+
 .memeImg {
   border-radius:3ex;
   color: rgb(rgb(20, 3, 3), rgb(17, 55, 17), rgb(2, 2, 41));

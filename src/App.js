@@ -1,20 +1,63 @@
 import './App.css';
+import { useState } from 'react';
 
-const meme = {
-  file: "https://wallpapercave.com/wp/wp7474251.jpg",
-  votes: 3,
-  imageSize: 100,
+
+/*
+Report of current problems:
+  --> Button click affects other clicks
+  --> Can't update h2 counter next to meme
+*/
+
+export default function App() {
+
+  //arbitrary and standard image information
+  const meme1 = {
+    file: "https://wallpapercave.com/wp/wp7474251.jpg",
+    votes: 3,
+    imageSize: 140,
+  }
+  const meme2 = {
+    file: "https://tse4.mm.bing.net/th?id=OIP.1Uu2KP7LqkHsiEaT2xsJJgHaGl&pid=Api&P=0&h=220.jpg",
+    votes: 3,
+    imageSize: 140,
+  }
+
+  const [count, setCount] = useState(0);
+
+  function likeMeme() {
+    setCount(count+1);
+  }
+  
+  function unlikeMeme() {
+    setCount(count-1);
+  }
+
+  return (
+    <div>
+      <div>
+        <h1>Welcome to the Meme Forum!</h1>
+      </div>
+      <MemeSection meme={meme1} count={count}/>
+      <Button text={"Like"} count={count} onCLick={likeMeme} />
+      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} />
+
+      <MemeSection meme={meme2} count={count}/>
+      <Button text={"Like"} count={count} onCLick={likeMeme} />
+      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} />
+    </div>
+  )
+
 }
 
-var categories = [
-  "Tom and Jerry",
-  "Competitive Programming",
-  "Karate",
-  "Mario",
-  "Naruto"
-]
+function Button({text, count, onCLick}) {
+  return (
+    <button onClick={onCLick}>
+      {text}: {count}
+    </button>
+  )
+}
 
-function App() {
+function MemeSection({meme, count}) {
   return (
     <div>
       <div>
@@ -26,28 +69,11 @@ function App() {
             width: meme.imageSize,
             height: meme.imageSize
           }}/>
-      </div>
 
-      <div>
-        <button>
-          Like
-        </button>
-        <button>
-          Unlike
-        </button>
       </div>
-
-      <div>
-        {categories.map(CAT=>(
-          <ul>
-            {CAT}
-          </ul>
-        ))}
-      </div>
-
     </div>
 
   );
+
 }
 
-export default App;
