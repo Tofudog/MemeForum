@@ -5,7 +5,7 @@ import { useState } from 'react';
 /*
 Report of current problems:
   --> Button click affects other clicks
-  --> Can't update h2 counter next to meme
+  --> counter h2 is not side by side to meme
 */
 
 export default function App() {
@@ -41,9 +41,9 @@ export default function App() {
       <Button text={"Like"} count={count} onCLick={likeMeme} />
       <Button text={"Unlike"} count={count} onCLick={unlikeMeme} />
 
-      <MemeSection meme={meme2} count={count}/>
+      {/* <MemeSection meme={meme2} count={count}/>
       <Button text={"Like"} count={count} onCLick={likeMeme} />
-      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} />
+      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} /> */}
     </div>
   )
 
@@ -52,14 +52,14 @@ export default function App() {
 function Button({text, count, onCLick}) {
   return (
     <button onClick={onCLick}>
-      {text}: {count}
+      {text}
     </button>
   )
 }
 
 function MemeSection({meme, count}) {
   return (
-    <div>
+    <>
       <div>
         <img
           className="memeImg"
@@ -69,9 +69,12 @@ function MemeSection({meme, count}) {
             width: meme.imageSize,
             height: meme.imageSize
           }}/>
-
+          <h2>
+            {count}
+          </h2>
       </div>
-    </div>
+    </>
+
 
   );
 
