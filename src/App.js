@@ -22,14 +22,28 @@ export default function App() {
     imageSize: 140,
   }
 
-  const [count, setCount] = useState(0);
+  const [counts, setCount] = useState([0, 0]);
 
-  function likeMeme() {
-    setCount(count+1);
+  function likeMeme(idx) {
+    const nextCounters = counts.map((c, i) => {
+      if (i === idx) {
+        return c + 1;
+      } else {
+        return c;
+      }
+    });
+    setCount(nextCounters);
   }
   
-  function unlikeMeme() {
-    setCount(count-1);
+  function unlikeMeme(idx) {
+    const nextCounters = counts.map((c, i) => {
+      if (i === idx) {
+        return c - 1;
+      } else {
+        return c;
+      }
+    });
+    setCount(nextCounters);
   }
 
   return (
@@ -37,13 +51,13 @@ export default function App() {
       <div>
         <h1>Welcome to the Meme Forum!</h1>
       </div>
-      <MemeSection meme={meme1} count={count}/>
-      <Button text={"Like"} count={count} onCLick={likeMeme} />
-      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} />
+      <MemeSection meme={meme1} count={counts[0]}/>
+      <Button text={"Like"} count={counts[0]} onCLick={() => {likeMeme(0)}} />
+      <Button text={"Unlike"} count={counts[0]} onCLick={() => {unlikeMeme(0)}} />
 
-      {/* <MemeSection meme={meme2} count={count}/>
-      <Button text={"Like"} count={count} onCLick={likeMeme} />
-      <Button text={"Unlike"} count={count} onCLick={unlikeMeme} /> */}
+      <MemeSection meme={meme2} count={counts[1]}/>
+      <Button text={"Like"} count={counts[1]} onCLick={() => {likeMeme(1)} } />
+      <Button text={"Unlike"} count={counts[1]} onCLick={() => {unlikeMeme(1)} } />
     </div>
   )
 
@@ -79,4 +93,3 @@ function MemeSection({meme, count}) {
   );
 
 }
-
